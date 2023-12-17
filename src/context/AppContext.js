@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import { POUND } from '../components/CurrencySelect';
 
 // 5. The reducer - this is used to update the state, based on the action
 export const AppReducer = (state, action) => {
@@ -10,16 +11,15 @@ export const AppReducer = (state, action) => {
             }, 0);
             total_budget += action.payload.cost;
             if(total_budget <= state.budget) {
-                const add_expenses = JSON.parse(JSON.stringify(state.expenses));
-                add_expenses.map((currentExp)=> {
+                state.expenses.map((currentExp)=> {
                     if(currentExp.name === action.payload.name) {
                         currentExp.cost += action.payload.cost;
                     }
                     return currentExp
                 });
+                action.type = 'DONE';
                 return {
-                    ...state,
-                    expenses: add_expenses
+                    ...state
                 };
             } else {
                 alert("Cannot increase the allocation! Out of funds");
@@ -28,28 +28,26 @@ export const AppReducer = (state, action) => {
                 };
             }
         case 'RED_EXPENSE':
-            const red_expenses = JSON.parse(JSON.stringify(state.expenses));
-            red_expenses.map((currentExp) => {
+            state.expenses.map((currentExp) => {
                 if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
                     currentExp.cost -= action.payload.cost;
                 }
                 return currentExp;
             });
+            action.type = 'DONE';
             return {
-                ...state,
-                expenses: red_expenses
+                ...state
             };
         case 'DELETE_EXPENSE':
-            const del_expenses = JSON.parse(JSON.stringify(state.expenses));
-            del_expenses.map((currentExp) => {
+            state.expenses.map((currentExp) => {
                 if (currentExp.name === action.payload) {
                     currentExp.cost = 0;
                 }
                 return currentExp;
             });
+            action.type = 'DONE';
             return {
-                ...state,
-                expenses: del_expenses
+                ...state
             };
         case 'SET_BUDGET':
             return {
@@ -61,7 +59,6 @@ export const AppReducer = (state, action) => {
                 ...state,
                 currency: action.payload
             };
-
         default:
             return { ...state };
     }
@@ -77,7 +74,7 @@ const initialState = {
         { id: "Human Resource", name: 'Human Resource', cost: 40 },
         { id: "IT", name: 'IT', cost: 500 },
     ],
-    currency: '\u00A3'
+    currency: POUND
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state

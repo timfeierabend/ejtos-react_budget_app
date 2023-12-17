@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
+export const DOLLAR = '\u0024';
+export const POUND = '\u00A3';
+export const EURO = '\u20AC';
+export const RUPEE = '\u20B9';
+
 const CurrencySelect = () => {
     const { currency, dispatch } = useContext(AppContext);
-
-    const DOLLAR = '\u0024';
-    const POUND = '\u00A3';
-    const EURO = '\u20AC';
-    const RUPEE = '\u20B9';
 
     const handleChange = (newCurrency) => {
         dispatch({
@@ -17,7 +17,7 @@ const CurrencySelect = () => {
     };
 
     return (
-        <div className='alert alert-success'>
+        <div className='alert alert-secondary'>
             <span>Currency: </span>
             <select name="currencySelect" id="currencySelect" value={currency} onChange={(event) => handleChange(event.target.value)}>
                 <option name="Dollar" value={DOLLAR}>{DOLLAR} Dollar</option>
