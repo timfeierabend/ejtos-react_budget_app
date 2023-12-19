@@ -17,6 +17,8 @@ export const AppReducer = (state, action) => {
                     }
                     return currentExp
                 });
+                // React.StrictMode fires reducers twice for forcing proper usage of Reducers.
+                // Change the action type to prevent the action from being applied twice
                 action.type = 'DONE';
                 return {
                     ...state
@@ -34,6 +36,8 @@ export const AppReducer = (state, action) => {
                 }
                 return currentExp;
             });
+            // React.StrictMode fires reducers twice for forcing proper usage of Reducers.
+            // Change the action type to prevent the action from being applied twice
             action.type = 'DONE';
             return {
                 ...state
@@ -45,6 +49,8 @@ export const AppReducer = (state, action) => {
                 }
                 return currentExp;
             });
+            // React.StrictMode fires reducers twice for forcing proper usage of Reducers.
+            // Change the action type to prevent the action from being applied twice
             action.type = 'DONE';
             return {
                 ...state
