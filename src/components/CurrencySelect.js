@@ -19,7 +19,7 @@ const CurrencySelect = () => {
     return (
         <div className='alert alert-secondary'>
             <span>Currency: </span>
-            <select name="currencySelect" id="currencySelect" value={currency} onChange={(event) => handleChange(event.target.value)}>
+            <select name="currencySelect" id="currencySelect" value={currency} style={{color: 'white', backgroundColor: '#00cc66'}} onChange={(event) => handleChange(event.target.value)}>
                 <option name="Dollar" value={DOLLAR}>{DOLLAR} Dollar</option>
                 <option name="Pound" value={POUND}>{POUND} Pound</option>
                 <option name="Euro" value={EURO}>{EURO} Euro</option>
